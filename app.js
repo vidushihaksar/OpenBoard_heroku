@@ -25,6 +25,7 @@ socketServer.on("connection", function (socket) {
     // })
 })
 //  tcp => uniquely identify server on a machine
-httpServer.listen(3000, function () {
-    console.log("Server is listening to request at port 3000");
-})
+const port = process.env.PORT || 3000;
+server.listen(port, function(req, res) {
+  console.log("Server has started at port 3000");
+}); 

@@ -15,6 +15,7 @@ body {
     border-radius: 50px;
     box-sizing: border-box;
     background-color: lightgray;
+    position: relative;
 }
 
 .tool-bar {
@@ -50,17 +51,17 @@ body {
     width: 10rem;
     display: none;
     position: absolute;
-    top: 7.9rem;
-    left: 15rem;
+    top: 5.75rem;
+    /* left: 15rem; */
     border-radius: 0.5rem;
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
 }
 
 .tool-options.eraser {
-    
+    left: -3rem;
     height: 3rem;
-    top: 7.75rem;
-    left: 20rem;
+    top: 5.75rem;
+    /* left: 20rem; */
     text-align: center;
     padding-top: 1rem;
 }
@@ -149,6 +150,8 @@ input[type=range]::-webkit-slider-thumb {
     left: 30vw;
     /* background-color: tan; */
     display: none;
+    resize: both;
+    overflow: auto;
 }
 
 .nav-bar {
@@ -157,7 +160,7 @@ input[type=range]::-webkit-slider-thumb {
     justify-content: flex-end;
     align-items: center;
     padding-right: 11px;
-    background-color: rgba(212, 126, 154, 0.979);
+    background-color: lightcoral;
 }
 
 .close,
@@ -169,7 +172,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .close {
-    background: rgb(202, 3, 3) ;
+    background: rgb(179, 5, 5);
 }
 
 .minimize {
