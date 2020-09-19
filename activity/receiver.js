@@ -5,7 +5,7 @@ socket.on("onsize", function(size) {
     ctx.strokeStyle = color;
   });
   socket.on("ontoolchange", function(tool) {
-    handleToolChange(tool);
+    handleTool(tool);
   });
   socket.on("onhamburger", function() {
     handleHamburger();
@@ -16,7 +16,7 @@ socket.on("onsize", function(size) {
     ctx.strokeStyle = color;
     ctx.beginPath();
     ctx.moveTo(x, y);
-    undoStack.push(point);
+    undoArr.push(point);
   });
   socket.on("onmousemove", function(point) {
     const { x, y, color, width } = point;
@@ -24,11 +24,11 @@ socket.on("onsize", function(size) {
     ctx.strokeStyle = color;
     ctx.lineTo(x, y);
     ctx.stroke();
-    undoStack.push(point);
+    undoArr.push(point);
   });
   socket.on("onundo", function() {
-    undoMaker();
+    undoLast();
   });
   socket.on("onredo", function() {
-    redoMaker();
+    redoLast();
   });
