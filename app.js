@@ -8,7 +8,7 @@ const server = require("http").Server(app);
 const path = require("path");
 const io = require("socket.io")(server);
 // serve static assets to client
-app.use(express.static("public"));
+app.use(express.static("activity"));
 // server
 io.on("connection", function(socket) {
   socket.on("size", function(size) {
