@@ -1,31 +1,44 @@
-// npm install express
+// server side
 const express = require("express");
+// express server
 const app = express();
+//  nodejs
+const server = require("http").Server(app);
+// nodejs => socket enabled
+const path = require("path");
+const io = require("socket.io")(server);
+// serve static assets to client
+app.use(express.static("public"));
 // server
-const httpServer = require("http").createServer(app);
-const socketServer = require("socket.io")(httpServer);
-// const path = require("path");
-// /client
-app.use(express.static("activity"));
-socketServer.on("connection", function (socket) {
-    console.log("New client connected")
-    console.log(socket.id);
-    // listener=> recieve
-    socket.on("colorChange", function (color) {
-        console.log(color);
-        socket.broadcast.emit('rColorChange', color);
-    })
-    // socket.on("md", function (point) {
-    //     console.log(point);
-    //     socket.broadcast.emit('onmd', point);
-    // })
-    // socket.on("mm", function (point) {
-    //     console.log(point);
-    //     socket.broadcast.emit('onmm', point);
-    // })
-})
-//  tcp => uniquely identify server on a machine
+io.on("connection", function(socket) {
+  socket.on("size", function(size) {
+    socket.broadcast.emit("onsize", size);
+  });
+  socket.on("color", function(color) {
+    socket.broadcast.emit("oncolor", color);
+  });
+
+  socket.on("toolchange", function(tool) {
+    socket.broadcast.emit("ontoolchange", tool);
+  });
+  socket.on("hamburger", function() {
+    socket.broadcast.emit("onhamburger");
+  });
+  socket.on("mousedown", function(point) {
+    socket.broadcast.emit("onmousedown", point);
+  });
+  socket.on("mousemove", function(point) {
+    socket.broadcast.emit("onmousemove", point);
+  });
+  socket.on("undo", function() {
+    socket.broadcast.emit("onundo");
+  });
+  socket.on("redo", function() {
+    socket.broadcast.emit("onredo");
+  });
+});
+// nodejs server
 const port = process.env.PORT || 3000;
 server.listen(port, function(req, res) {
   console.log("Server has started at port 3000");
-}); 
+});
